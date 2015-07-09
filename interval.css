@@ -1,11 +1,89 @@
 body {
-	background-color: olive;
+	background-color: #B2AB8E;
+}
+
+button {
+	width: 40%;
+	height: 40px;
+	background-color: #BB9229;
+	color: white;
+	border: none;
+	border-bottom: 4px solid #7c611b;
+	border-radius: 5px;
+}
+button:active {
+	background-color: #4A4132;
+	border: none;
+}
+button:focus {
+	outline: 0;
+}
+
+#startButton {
+	float: left;
+}
+#stopButton {
+	float: right;
 }
 
 #clock {
 	width: 40%;
+	margin: 40px auto 20px auto;
+	color: #4A4132;
+	font-size: 2em;
+	text-align: center;
+}
+
+#controls {
+	width: 40%;
+	margin: 0 auto;
+	height: 40px;
+	margin-bottom: 20px;
+}
+
+.message {
+	width: 60%;
+	height: auto;
+	margin: 0 auto;
+	color: white;
+	background-color: #322C0F;
+	text-align: center;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+}
+
+#done {
+	margin-bottom: 1em;
+}
+
+#eyemessage, #walkmessage {
+	display: none;	
+}
+
+#countDownContainer {
+	width: 60%;
 	height: 200px;
 	margin: 0 auto;
-	background-color: indigo;
-	color: yellow;
+	padding: 10px;
+	text-align: center;
+	color: white;
 }
+
+#cdEye, #cdWalk {
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+	margin: 0 25px;
+	color: #4A4132;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+}
+
+#progress {
+    width: 100%;
+    height: 10px;
+    margin: 0 auto 1em auto;
+}
+

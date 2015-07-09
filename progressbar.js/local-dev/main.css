@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+svg {
+    display: block;
+    height: 100px;
+    width: 100%;
+}
+
+#progress > svg {
+	display: block;
+	height: 10px;
+}
+
+
