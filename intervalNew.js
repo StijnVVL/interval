@@ -7,7 +7,8 @@ $(function() {
 	var walkTime = 10000;
 
 	var line = new ProgressBar.Line('#progress', {
-	    trailWidth: 0,
+	    trailWidth: 0.2,
+	    trailColor: '#4A4132',
 	    duration: lookAwayTime,
 	    strokeWidth: 1,
 	    color: '#BB9229',
@@ -28,9 +29,6 @@ $(function() {
 	    strokeWidth: 4,
 	    duration: walkTime
 	});	
-
-		// 
-	// walkCountDown.animate(1.0);
 
 
 // the clock
@@ -105,9 +103,9 @@ $(function() {
 	// clearing the intervals
 	$('#stopButton').click(function() {
 		clearInterval(eyeInterval);
+		strainCountDown.set(0.0);
 		clearInterval(walkInterval);
 		walkCountDown.set(0.0);
-		strainCountDown.set(0.0);
 	});
 })
 

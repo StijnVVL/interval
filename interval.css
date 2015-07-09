@@ -44,7 +44,7 @@ button:focus {
 .message {
 	width: 60%;
 	height: auto;
-	margin: 0 auto;
+	margin: 30px auto;
 	color: white;
 	background-color: #322C0F;
 	text-align: center;
