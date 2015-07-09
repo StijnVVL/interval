@@ -2,9 +2,9 @@ $(function() {
 	console.log('ready');
 
 //global vars
-	var lookAwayTime = 3000;
-	var strainTime = 5000;
-	var walkTime = 10000;
+	var lookAwayTime = 20000;
+	var strainTime = 1200000;
+	var walkTime = 3300000;
 
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
