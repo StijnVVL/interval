@@ -1,29 +1,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="interval.css">
-  <link rel="stylesheet" href="progressbar.js/local-dev/main.css">
-  <script type="text/javascript" src="jquery/jquery.js"></script>
-  <script type="text/javascript" src="intervalNew.js"></script>
-  <script src="progressbar.js/dist/progressbar.min.js"></script>
-  <title>interval</title>
+	<link rel="stylesheet" type="text/css" href="interval.css">
+	<link rel="stylesheet" href="progressbar.js/local-dev/main.css">
+	<script type="text/javascript" src="jquery/jquery.js"></script>
+	<script type="text/javascript" src="intervalNew.js"></script>
+	<script src="progressbar.js/dist/progressbar.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,400' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200' rel='stylesheet' type='text/css'>
+	<title>interval</title>
 </head>
 
 <body>
 	<div id="clock"></div>
-	<div id="controls">
-		<button id="startButton">Start the clock</button>
-		<button id="stopButton">Stop the clock</button>
-		<audio id='eyeStrainSnd'>
-			<source src='media/laserBlast.wav' type='audio/wav'>
-		</audio>
-		<audio id='eyeComplete'>
-			<source src='media/airplanenotif.wav' type='audio/wav'>
-		</audio>
-		<audio id='walkSnd'>
-			<source src='media/R2D2.wav' type='audio/wav'>
-		</audio>
-	</div>
 
 	<div id="countDownContainer">
 		<div id="cdEye">
@@ -33,7 +22,7 @@
 			<p>Time to next walk exercise</p>
 		</div>
 	</div>
-	
+
 	<div class="message" id="eyemessage">
 		<p>Look away from your screen for 20 seconds</p>
 		<div id="progress"></div>
@@ -44,6 +33,19 @@
 		<button id="done">I'm back</button>
 	</div>
 
+	<div id="controls">
+		<button id="startButton">START</button>
+		<button id="stopButton">STOP</button>
+		<audio id='eyeStrainSnd'>
+			<source src='media/laserBlast.wav' type='audio/wav'>
+		</audio>
+		<audio id='eyeComplete'>
+			<source src='media/airplanenotif.wav' type='audio/wav'>
+		</audio>
+		<audio id='walkSnd'>
+			<source src='media/R2D2.wav' type='audio/wav'>
+		</audio>
+	</div>
 </body>
 
 </html>
