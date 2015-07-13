@@ -2,9 +2,9 @@ $(function() {
 	console.log('ready');
 
 //global vars
-	var lookAwayTime = 3000;
-	var strainTime = 5000;
-	var walkTime = 10000;
+	var lookAwayTime = 20000;
+	var strainTime = 1200000;
+	var walkTime = 3300000;
 
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
@@ -118,6 +118,4 @@ $(function() {
 // 55 minutes = 3300000
 // testTimes = 3000, 5000, 10000
 
-// Add logic to get feedback when the clock has started/how long it will take to complete the first interval.
-// Add logic to display clock immediately instead of after first timeout...$
 // Add logic to display every second in the countdowntimers (every 1000 miliseconds get value() en bereken wat hij moet tonen)
