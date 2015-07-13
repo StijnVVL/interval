@@ -19,7 +19,13 @@ $(function() {
 	    trailColor: '#4A4132',
 	    trailWidth: 0.2,
 	    strokeWidth: 4,
-	    duration: strainTime
+	    duration: strainTime,
+	    text: {
+        value: '0'
+    	},
+    		step: function(state, shape) {
+        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+    		}
 	});
 
 	var walkCountDown = new ProgressBar.Circle('#cdWalk', {
@@ -27,7 +33,13 @@ $(function() {
 	    trailColor: '#4A4132',
 	    trailWidth: 0.2,
 	    strokeWidth: 4,
-	    duration: walkTime
+	    duration: walkTime,
+	    text: {
+        value: '0'
+    	},
+    		step: function(state, shape) {
+        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+    		}	    
 	});	
 
 
