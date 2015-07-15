@@ -13,6 +13,42 @@
 </head>
 
 <body>
+	<div id="header">
+		<div id="title_wrapper">
+			<img src="media/settings.png" id="image">
+			<p id="title"> <b>DESK HEALTH</b> </p>
+		</div>
+	</div>
+
+	<div id="settings_container">
+		<div id="eyeSet">
+			<p class="settingstext">time between eye exercises</p>
+			<span class="selectcont">
+				<select id="eyeOptions">
+					<option value="test">test</option>
+					<option>10 minutes</option>
+					<option selected>20 minutes (recommended)</option>
+					<option>40 minutes</option>
+				</select>
+			</span>
+		</div>
+
+		<div id="walkSet">
+			<p class="settingstext">time between walk exercises</p>
+			<span class="selectcont">	
+				<select id="walkOptions">
+					<option>test</option>
+					<option>30 minutes</option>
+					<option selected>55 minutes (recommended)</option>
+					<option>1 hour 15 minutes</option>
+				</select>
+			</span>
+		</div>
+		<div style="text-align: center;">
+			<button id="apply">apply</button>
+		</div>
+	</div>
+
 	<div id="clock"></div>
 
 	<div id="countDownContainer">
@@ -44,7 +80,7 @@
 			<source src='media/airplanenotif.wav' type='audio/wav'>
 		</audio>
 		<audio id='walkSnd'>
-			<source src='media/marchingSoldiers.wav' type='audio/wav'>
+			<source src='media/glasspingnotif.wav' type='audio/wav'>
 		</audio>
 	</div>
 </body>

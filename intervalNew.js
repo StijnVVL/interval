@@ -46,11 +46,48 @@ $(function() {
 // the clock
 	function myTimer() {
 	    var time = new Date();
-	    document.getElementById("clock").innerHTML = time.toLocaleTimeString();
+	    document.getElementById("clock").innerHTML = time.toLocaleTimeString('en-GB');
 	}
 	myTimer();
 	var updateTime = setInterval(function(){myTimer()}, 500);
 
+	function checkOption() {
+		switch (true) {
+			case document.getElementById('eyeOptions').value === 'test':
+				strainTime = 30000
+			break;
+			case document.getElementById('eyeOptions').value === '10 minutes':
+				strainTime = 600000
+			break;
+			case document.getElementById('eyeOptions').value === '20 minutes (recommended)':
+				strainTime = 1200000
+			break;
+			case document.getElementById('eyeOptions').value === '40 minutes':
+				strainTime = 2400000
+			break;
+		}
+		switch (true) {
+			case document.getElementById('walkOptions').value === 'test':
+				walkTime = 10000
+			break;
+			case document.getElementById('walkOptions').value === '30 minutes':
+				walkTime = 1800000
+			break;
+			case document.getElementById('walkOptions').value === '55 minutes (recommended)':
+				walkTime = 3300000
+			break;
+			case document.getElementById('walkOptions').value === '1 hour 15 minutes':
+				walkTime = 4500000
+			break;
+		};	
+	}
+
+	$('#apply').click(function() {
+		checkOption();
+		$('#settings_container').hide();
+		console.log(strainTime);
+		console.log(walkTime);
+	});
 
 // defining what happens 
 	function strain() {
@@ -119,6 +156,18 @@ $(function() {
 		clearInterval(walkInterval);
 		walkCountDown.set(0.0);
 	});
+
+
+
+
+	function toggleSettings() {
+		$('#image').click(function() {
+			$('#settings_container').toggle(200);
+		});
+	}
+	toggleSettings();
+
+
 })
 
 
@@ -129,5 +178,3 @@ $(function() {
 // 20 minutes = 1200000
 // 55 minutes = 3300000
 // testTimes = 3000, 5000, 10000
-
-// Add logic to display every second in the countdowntimers (every 1000 miliseconds get value() en bereken wat hij moet tonen)
