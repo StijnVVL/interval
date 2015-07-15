@@ -179,6 +179,7 @@ $(function() {
 
 // known issues:
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
+// can change the interval, but animations don't change! I have no idea why!
 
 
 // 20 minutes = 1200000
