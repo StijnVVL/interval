@@ -21,7 +21,7 @@ $(function() {
 	    strokeWidth: 4,
 	    duration: strainTime,
 	    text: {
-        value: '0'
+        	value: '0'
     	},
     		step: function(state, shape) {
         		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
@@ -35,7 +35,7 @@ $(function() {
 	    strokeWidth: 4,
 	    duration: walkTime,
 	    text: {
-        value: '0'
+        	value: '0'
     	},
     		step: function(state, shape) {
         		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
@@ -87,6 +87,7 @@ $(function() {
 		$('#settings_container').hide();
 		console.log(strainTime);
 		console.log(walkTime);
+		stopEverything();
 	});
 
 // defining what happens 
@@ -149,16 +150,21 @@ $(function() {
 		walkInt();
 		walkCountDown.animate(1.0);
 	});
-	// clearing the intervals
-	$('#stopButton').click(function() {
+	
+	// stop everything
+	function stopEverything() {
 		clearInterval(eyeInterval);
 		strainCountDown.set(0.0);
 		clearInterval(walkInterval);
 		walkCountDown.set(0.0);
+	}
+
+	//stop button
+	$('#stopButton').click(function() {
+		stopEverything();
 	});
-
-
-
+	
+	
 
 	function toggleSettings() {
 		$('#image').click(function() {
