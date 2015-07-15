@@ -1,10 +1,14 @@
 $(function() {
-	console.log('ready');
+	console.log('interval file ready');
 
 //global vars
 	var lookAwayTime = 20000;
 	var strainTime = 1200000;
 	var walkTime = 3300000;
+
+	// make sure there are no errors when new values are applied when the interval is not yet running
+	var eyeInterval = null;
+    var walkInterval = null;
 
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
@@ -51,6 +55,9 @@ $(function() {
 	myTimer();
 	var updateTime = setInterval(function(){myTimer()}, 500);
 
+
+
+// Settings
 	function checkOption() {
 		switch (true) {
 			case document.getElementById('eyeOptions').value === 'test':
@@ -90,17 +97,25 @@ $(function() {
 		stopEverything();
 	});
 
+
+
+
 // defining what happens 
 	function strain() {
 		document.getElementById('eyeStrainSnd').play();
 		$('#eyemessage').show();
 		line.animate(1.0);
 		strainCountDown.set(0.0);
+		var eyeNotif = new Notification('DESK HEALTH', {
+	  		body: 'Your eye are getting tired. Look away from your screen for 20 seconds. A sound will play, indicating you can continue working.',
+	  		icon: 'media/eyeIcon.png'
+		});
 		setTimeout(function() {complete()}, lookAwayTime);
 
 		function complete() {
 			document.getElementById('eyeComplete').play();
 			$('#eyemessage').hide();
+			eyeNotif.close();
 			line.set(0.0);
 			restartEye();
 		}
@@ -108,8 +123,14 @@ $(function() {
 		function restartEye() {
 			clearInterval(eyeInterval);
 			eyeInt();
-			strainCountDown.animate(1.0);
+			strainCountDown.animate(1.0, {
+	            duration: strainTime
+			});
 		}
+
+		eyeNotif.onclick = function() {
+    		window.focus();
+		};
 	}
 
 
@@ -117,20 +138,31 @@ $(function() {
 		document.getElementById('walkSnd').play();
 		walkCountDown.set(0.0);
 		$('#walkmessage').show();
+		var walkNotif = new Notification('DESK HEALTH', {
+			body: 'Time for a walk!',
+			icon: 'media/walkIcon.png'
+		});
 		restartWalk();
 
 		function restartWalk() {
-			walkCountDown.animate(1.0);
+			walkCountDown.animate(1.0, {
+            	duration: walkTime
+			});
 		}
 
 		//I have walked - button
 			$('#done').click(function() {
 				$("#walkmessage").hide();
 				walkCountDown.set(0.0);
+				walkNotif.close();
 				restartWalk();
 				clearInterval(walkInterval);
 				walkInt();
 			});
+		
+		walkNotif.onclick = function() {
+    		window.focus();
+		};
 	}
 
 
@@ -139,16 +171,19 @@ $(function() {
 		eyeInterval = setInterval(function() { strain() }, strainTime);
 	}
 	function walkInt() {
-		walkInterval = setInterval(function() {walk()}, walkTime);
+		walkInterval = setInterval(function() { walk() }, walkTime);
 	}
-
 
 	// starting to count
 	$('#startButton').click(function() {
 		eyeInt();
-		strainCountDown.animate(1.0);
+		strainCountDown.animate(1.0, {
+            duration: strainTime
+		});
 		walkInt();
-		walkCountDown.animate(1.0);
+		walkCountDown.animate(1.0,   {
+            duration: walkTime
+        });
 	});
 	
 	// stop everything
@@ -174,12 +209,41 @@ $(function() {
 	toggleSettings();
 
 
+
+
+
+
+	function checkNotifCompatibility() {
+		if (!('Notification' in window)) {
+  			console.log('this browser does not support notifications')
+		};
+	}
+	checkNotifCompatibility();
+
+// request notification permissions to user (required)
+	Notification.requestPermission(function(result) {
+  		if (result === 'denied') {
+    		console.log('Permission wasn\'t granted. Allow a retry.');
+    		return;
+  		} else if (result === 'granted') {
+  			console.log('Permission was granted. The user will receive notifications');
+  			return;
+  		} else if (result === 'default') {
+    		console.log('the user has not responded just yet');
+    		return;
+  		}
+  	});
+  	Notification.requestPermission();
+
+
 })
 
 
 // known issues:
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
-// can change the interval, but animations don't change! I have no idea why!
+
+
+// write allow/deny logic for notifications
 
 
 // 20 minutes = 1200000
