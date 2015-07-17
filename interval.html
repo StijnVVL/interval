@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="interval.css">
+	<link rel="stylesheet/less" type="text/less" href="styles/variables.less">
+	<link rel="stylesheet/less" type="text/less" id="globalStyle" href="styles/global.less" title="default">	
+	<link rel="season stylesheet" type="text/less" id="stylesheet" href="styles/themeAutumn.less" title="alternate">
 	<link rel="stylesheet" href="progressbar.js/local-dev/main.css">
 	<script type="text/javascript" src="jquery/jquery.js"></script>
 	<script type="text/javascript" src="intervalNew.js"></script>
@@ -22,7 +24,7 @@
 
 	<div id="settings_container">
 		<div id="eyeSet">
-			<p class="settingstext">time between eye exercises</p>
+			<p class="settingstext">Time between eye exercises</p>
 			<span class="selectcont">
 				<select id="eyeOptions">
 					<option value="test">test</option>
@@ -34,7 +36,7 @@
 		</div>
 
 		<div id="walkSet">
-			<p class="settingstext">time between walk exercises</p>
+			<p class="settingstext">Time between walk exercises</p>
 			<span class="selectcont">	
 				<select id="walkOptions">
 					<option>test</option>
@@ -44,6 +46,19 @@
 				</select>
 			</span>
 		</div>
+
+		<div id="stylePickerCont">
+			<p class="settingstext">Style</p>
+			<span class="selectcont">	
+				<select id="styleOptions">
+					<option selected> <a href="#" rel="../styles/themeAutumn.less">Autumn</a> </option>
+					<option> <a href="#" rel="../styles/themeWinter.less">Winter</a> </option>
+					<option>Spring</option>
+					<option>Summer</option>
+				</select>
+			</span>
+		</div>
+
 		<div style="text-align: center;">
 			<button id="apply">APPLY</button>
 		</div>
@@ -83,6 +98,8 @@
 			<source src='media/glasspingnotif.wav' type='audio/wav'>
 		</audio>
 	</div>
+
+	<script src="bower_components/less/dist/less.js"></script>
 </body>
 
 </html>

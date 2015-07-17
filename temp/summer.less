@@ -1,6 +1,8 @@
+@import 'variables';
+
 body {
 	width: 100%;
-	background-color: #B2AB8E;
+	background-color: @summerBody;
 	font-family: 'Source Sans Pro', sans-serif;
 	margin: 0;
 }
@@ -9,7 +11,7 @@ body {
 #header {
 	width: 100%;
 	padding: 20px 20px 20px 70px;
-	background-color: #4A4132;
+	background-color: @summerHead;
 	color: white;
 	text-align: bottom;
 	box-sizing: border-box;
@@ -32,7 +34,7 @@ img {
 #settings_container {
 	width: 20%;
 	height: auto;
-	background-color: #FFF8E7;
+	background-color: @summerBack;
 	border-radius: 5px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 	float: right;
@@ -52,19 +54,19 @@ select {
 	height: 40px;
 	margin-bottom: 15px;
 	background: transparent;
-	border: 1px solid #BB9229;
+	border: 1px solid @summerAction;
 	border-radius: 0;
-	color: #BB9229;
+	color: @summerAction;
 	-webkit-appearance: none;
 	padding: 10px;
-	background-image: url('media/dropdown.png');
+	background-image: url('../media/dropdown.png');
 	background-repeat: no-repeat;
 	background-position: center right 10px;
 	background-size: 15px 10px;
 	font-family: 'Source Sans Pro', sans-serif;
 }
 select:hover {
-	background-color: #BB9229;
+	background-color: @summerAction;
 	color: white;
 }
 select:focus {
@@ -74,13 +76,13 @@ select:focus {
 	width: 50%;
 	height: 40px;
 	margin: 0 auto;
-	background-color: #BB9229;
+	background-color: @summerAction;
 }
 #apply:focus {
 	outline: 0;
 }
 #apply:active {
-	background-color: #4A4132;
+	background-color: @summerActionDark;
 }
 
 
@@ -89,7 +91,7 @@ select:focus {
 #clock {
 	width: 75%;
 	margin: 40px auto 20px auto;
-	color: #4A4132;
+	color: @summerHead;
 	font-size: 7em;
 	font-weight: 100;
 	text-align: center;
@@ -103,7 +105,7 @@ select:focus {
 	height: auto;
 	margin: 30px auto;
 	color: white;
-	background-color: #322C0F;
+	background-color: @summerPopup;
 	text-align: center;
 	padding: 10px;
 	border-radius: 5px;
@@ -116,14 +118,14 @@ select:focus {
 #done {
 	margin-bottom: 1em;
 	width: 25%;
-	background-color: #BB9229;
-	border-bottom: 4px solid #7C611B;
+	background-color: @summerAction;
+	border-bottom: 4px solid @summerActionShade;
 }
 #done:focus {
 	outline: 0;
 }
 #done:active {
-	background-color: #4A4132;
+	background-color: @summerActionDark;
 	border: none;
 }
 
@@ -149,8 +151,8 @@ select:focus {
 	height: auto;
 	display: inline-block;
 	margin: 0 25px;
-	color: #4A4132;
-	background-color: #FFF8E7;
+	color: @summerHead;
+	background-color: @summerBack;
 	border-radius: 5px;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 }
@@ -193,13 +195,13 @@ button {
 }
 
 #startButton {
-	background-color: #BB9229;
+	background-color: @summerAction;
 }
 #stopButton {
 	background-color: #B8BFB1;
 }
 #startButton:active {
-	background-color: #4A4132;
+	background-color: @summerActionDark;
 	border: none;
 }
 #startButton:focus {

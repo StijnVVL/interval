@@ -1,5 +1,5 @@
 $(function() {
-	console.log('interval file ready');
+	console.log('main javascript ready');
 
 //global vars
 	var lookAwayTime = 20000;
@@ -86,14 +86,13 @@ $(function() {
 			case document.getElementById('walkOptions').value === '1 hour 15 minutes':
 				walkTime = 4500000
 			break;
-		};	
+		}	
+		styler();
 	}
 
 	$('#apply').click(function() {
 		checkOption();
 		$('#settings_container').hide();
-		console.log(strainTime);
-		console.log(walkTime);
 		stopEverything();
 	});
 
@@ -107,7 +106,7 @@ $(function() {
 		line.animate(1.0);
 		strainCountDown.set(0.0);
 		var eyeNotif = new Notification('DESK HEALTH', {
-	  		body: 'Your eye are getting tired. Look away from your screen for 20 seconds. A sound will play, indicating you can continue working.',
+	  		body: 'Your eye are getting tired. Look away from your screen for 20 seconds.',
 	  		icon: 'media/eyeIcon.png'
 		});
 		setTimeout(function() {complete()}, lookAwayTime);
@@ -197,6 +196,8 @@ $(function() {
 	//stop button
 	$('#stopButton').click(function() {
 		stopEverything();
+		var themeStyle = document.getElementById('stylesheet');
+    	themeStyle.href = '../styles/themeWinter.less';
 	});
 	
 	
@@ -216,6 +217,8 @@ $(function() {
 	function checkNotifCompatibility() {
 		if (!('Notification' in window)) {
   			console.log('this browser does not support notifications')
+		} else {
+			console.log('this browser supports notifications')
 		};
 	}
 	checkNotifCompatibility();
@@ -244,6 +247,7 @@ $(function() {
 
 
 // write allow/deny logic for notifications
+// haha add custom themes (christmas, halloween, valentine, summer, winter, autumn, spring...) http://www.qualitycodes.com/tip/14/dynamically-choosingchanging-a-css-file.html
 
 
 // 20 minutes = 1200000

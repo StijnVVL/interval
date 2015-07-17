@@ -1,0 +1,87 @@
+@import 'variables';
+
+body {
+	background-color: @winterBody;
+}
+
+
+#header {
+	background-color: @winterHead;
+	color: white;
+}
+
+#settings_container {
+	background-color: @winterBack;
+}
+select {
+	background: transparent;
+	border: 1px solid @winterAction;
+	color: @winterAction;
+	-webkit-appearance: none;
+	background-image: url('../media/dropdown.png');
+}
+select:hover {
+	background-color: @winterAction;
+	color: white;
+}
+#apply {
+	background-color: @winterAction;
+}
+#apply:active {
+	background-color: @winterActionDark;
+}
+
+
+#clock {
+	color: @winterHead;
+}
+
+
+
+
+.message {
+	color: white;
+	background-color: @winterPopup;
+}
+
+#done {
+	background-color: @winterAction;
+	border-bottom: 4px solid @winterActionShade;
+}
+
+#done:active {
+	background-color: @winterActionDark;
+}
+
+
+
+
+#countDownContainer {
+	color: white;
+}
+
+#cdEye, #cdWalk {
+	color: @winterHead;
+	background-color: @winterBack;
+}
+
+
+button {
+	color: white;
+}
+
+#startButton {
+	background-color: @winterAction;
+}
+#stopButton {
+	background-color: #B8BFB1;
+}
+#startButton:active {
+	background-color: @winterActionDark;
+	border: none;
+}
+#stopButton:active {
+	background-color: #7A7F76;
+	border: none;
+}
+

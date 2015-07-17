@@ -1,0 +1,90 @@
+@import 'variables';
+
+body {
+	background-color: @autumnBody;
+}
+
+
+#header {
+	background-color: @autumnHead;
+	color: white;
+}
+
+#settings_container {
+	background-color: @autumnBack;
+}
+select {
+	background: transparent;
+	border: 1px solid @autumnAction;
+	color: @autumnAction;
+	-webkit-appearance: none;
+	background-image: url('../media/dropdown.png');
+	background-repeat: no-repeat;
+	background-position: center right 10px;
+	background-size: 15px 10px;
+}
+select:hover {
+	background-color: @autumnAction;
+	color: white;
+}
+#apply {
+	background-color: @autumnAction;
+}
+#apply:active {
+	background-color: @autumnActionDark;
+}
+
+
+#clock {
+	color: @autumnHead;
+}
+
+
+
+
+.message {
+	color: white;
+	background-color: @autumnPopup;
+}
+
+#done {
+	background-color: @autumnAction;
+	border-bottom: 4px solid @autumnActionShade;
+}
+
+#done:active {
+	background-color: @autumnActionDark;
+}
+
+
+
+
+#countDownContainer {
+	color: white;
+}
+
+#cdEye, #cdWalk {
+	color: @autumnHead;
+	background-color: @autumnBack;
+}
+
+
+button {
+	color: white;
+}
+
+#startButton {
+	background-color: @autumnAction;
+}
+#stopButton {
+	background-color: #B8BFB1;
+}
+#startButton:active {
+	background-color: @autumnActionDark;
+	border: none;
+}
+#stopButton:active {
+	background-color: #7A7F76;
+	border: none;
+}
+
