@@ -87,7 +87,6 @@ $(function() {
 				walkTime = 4500000
 			break;
 		}	
-		styler();
 	}
 
 	$('#apply').click(function() {
