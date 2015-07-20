@@ -1,12 +1,2 @@
-body {
-	background-color: yellow;
-}
-
-#div {
-	background-color: red;
-	border: 1px solid white;
-	color: white;
-	width: 10%;
-	height: 30px;
-	margin: 0 auto;
-}
+body{background-color:#ff0}#changeButton{background-color:red;border:1px solid white;color:#fff;width:10%;height:30px;margin:0 auto;text-align:center;line-height:30px;cursor:pointer}
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */

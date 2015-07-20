@@ -87,6 +87,24 @@ $(function() {
 				walkTime = 4500000
 			break;
 		}	
+
+		if (document.getElementById('styleOptions').value === 'Autumn') {
+			$('#theme').attr('href', '../styles/themeAutumn.css');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		} else if (document.getElementById('styleOptions').value === 'Winter') {
+			$('#theme').attr('href', '../styles/themeWinter.css');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		} else if (document.getElementById('styleOptions').value === 'Spring') {
+			$('#theme').attr('href', '../styles/themeSpring.css');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		} else if (document.getElementById('styleOptions').value === 'Summer') {
+			$('#theme').attr('href', '../styles/themeSummer.css');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		};
 	}
 
 	$('#apply').click(function() {
@@ -195,8 +213,6 @@ $(function() {
 	//stop button
 	$('#stopButton').click(function() {
 		stopEverything();
-		var themeStyle = document.getElementById('stylesheet');
-    	themeStyle.href = '../styles/themeWinter.less';
 	});
 	
 	
@@ -236,7 +252,6 @@ $(function() {
   		}
   	});
   	Notification.requestPermission();
-
 
 })
 
