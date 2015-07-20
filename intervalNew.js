@@ -89,19 +89,19 @@ $(function() {
 		}	
 
 		if (document.getElementById('styleOptions').value === 'Autumn') {
-			$('#theme').attr('href', '../styles/themeAutumn.css');
+			$('#theme').attr('href', '../styles/themeAutumn.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
 		} else if (document.getElementById('styleOptions').value === 'Winter') {
-			$('#theme').attr('href', '../styles/themeWinter.css');
+			$('#theme').attr('href', '../styles/themeWinter.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
 		} else if (document.getElementById('styleOptions').value === 'Spring') {
-			$('#theme').attr('href', '../styles/themeSpring.css');
+			$('#theme').attr('href', '../styles/themeSpring.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
 		} else if (document.getElementById('styleOptions').value === 'Summer') {
-			$('#theme').attr('href', '../styles/themeSummer.css');
+			$('#theme').attr('href', '../styles/themeSummer.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
 		};
@@ -260,8 +260,7 @@ $(function() {
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
 
 
-// write allow/deny logic for notifications
-// haha add custom themes (christmas, halloween, valentine, summer, winter, autumn, spring...) http://www.qualitycodes.com/tip/14/dynamically-choosingchanging-a-css-file.html
+// haha add custom themes (christmas, halloween, valentine, summer, winter, autumn, spring...)
 
 
 // 20 minutes = 1200000
