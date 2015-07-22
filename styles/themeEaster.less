@@ -1,25 +1,26 @@
 @import 'variables';
 
 body {
-	background-color: @summerBody;
-	background: url('../media/summer.png') no-repeat;
+	background-color: @easterBody;
+	background-image: url('../media/easter.png');
+	background-repeat: no-repeat;
 	background-size: 200px 200px;
-	background-position: 20px 160px;
+	background-position: 20px 200px;
 }
 
 
 #header {
-	background-color: @summerHead;
+	background-color: @easterHead;
 	color: white;
 }
 
 #settings_container {
-	background-color: @summerBack;
+	background-color: @easterBack;
 }
 select {
 	background: transparent;
-	border: 1px solid @summerAction;
-	color: @summerAction;
+	border: 1px solid @easterAction;
+	color: @easterAction;
 	-webkit-appearance: none;
 	background-image: url('../media/dropdown.png');
 	background-repeat: no-repeat;
@@ -27,19 +28,19 @@ select {
 	background-size: 15px 10px;
 }
 select:hover {
-	background-color: @summerAction;
+	background-color: @easterAction;
 	color: white;
 }
 #apply {
-	background-color: @summerAction;
+	background-color: @easterAction;
 }
 #apply:active {
-	background-color: @summerActionDark;
+	background-color: @easterActionDark;
 }
 
 
 #clock {
-	color: @summerHead;
+	color: @easterHead;
 }
 
 
@@ -47,16 +48,16 @@ select:hover {
 
 .message {
 	color: white;
-	background-color: @summerPopup;
+	background-color: @easterPopup;
 }
 
 #done {
-	background-color: @summerAction;
-	border-bottom: 4px solid @summerActionShade;
+	background-color: @easterAction;
+	border-bottom: 4px solid @easterActionShade;
 }
 
 #done:active {
-	background-color: @summerActionDark;
+	background-color: @easterActionDark;
 }
 
 
@@ -67,8 +68,12 @@ select:hover {
 }
 
 #cdEye, #cdWalk {
-	color: @summerHead;
-	background-color: @summerBack;
+	color: @easterHead;
+	background-color: @easterBack;
+}
+
+#cdEye > svg {
+	color: @easterAction;
 }
 
 
@@ -77,13 +82,13 @@ button {
 }
 
 #startButton {
-	background-color: @summerAction;
+	background-color: @easterAction;
 }
 #stopButton {
 	background-color: #B8BFB1;
 }
 #startButton:active {
-	background-color: @summerActionDark;
+	background-color: @easterActionDark;
 	border: none;
 }
 #stopButton:active {

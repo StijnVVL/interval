@@ -1,25 +1,26 @@
 @import 'variables';
 
 body {
-	background-color: @summerBody;
-	background: url('../media/summer.png') no-repeat;
-	background-size: 200px 200px;
+	background-color: @halloweenBody;
+	background-image: url('../media/halloween.png');
+	background-repeat: no-repeat;
+	background-size: auto 200px;
 	background-position: 20px 160px;
 }
 
 
 #header {
-	background-color: @summerHead;
+	background-color: @halloweenHead;
 	color: white;
 }
 
 #settings_container {
-	background-color: @summerBack;
+	background-color: @halloweenBack;
 }
 select {
 	background: transparent;
-	border: 1px solid @summerAction;
-	color: @summerAction;
+	border: 1px solid @halloweenHead;
+	color: @halloweenHead;
 	-webkit-appearance: none;
 	background-image: url('../media/dropdown.png');
 	background-repeat: no-repeat;
@@ -27,19 +28,19 @@ select {
 	background-size: 15px 10px;
 }
 select:hover {
-	background-color: @summerAction;
+	background-color: @halloweenHead;
 	color: white;
 }
 #apply {
-	background-color: @summerAction;
+	background-color: @halloweenHead;
 }
 #apply:active {
-	background-color: @summerActionDark;
+	background-color: @halloweenActionDark;
 }
 
 
 #clock {
-	color: @summerHead;
+	color: @halloweenHead;
 }
 
 
@@ -47,16 +48,16 @@ select:hover {
 
 .message {
 	color: white;
-	background-color: @summerPopup;
+	background-color: @halloweenPopup;
 }
 
 #done {
-	background-color: @summerAction;
-	border-bottom: 4px solid @summerActionShade;
+	background-color: @halloweenBody;
+	border-bottom: 4px solid @halloweenActionShade;
 }
 
 #done:active {
-	background-color: @summerActionDark;
+	background-color: @halloweenActionDark;
 }
 
 
@@ -67,8 +68,8 @@ select:hover {
 }
 
 #cdEye, #cdWalk {
-	color: @summerHead;
-	background-color: @summerBack;
+	color: @halloweenHead;
+	background-color: @halloweenBack;
 }
 
 
@@ -77,13 +78,13 @@ button {
 }
 
 #startButton {
-	background-color: @summerAction;
+	background-color: @halloweenHead;
 }
 #stopButton {
 	background-color: #B8BFB1;
 }
 #startButton:active {
-	background-color: @summerActionDark;
+	background-color: @halloweenActionDark;
 	border: none;
 }
 #stopButton:active {

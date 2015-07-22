@@ -10,6 +10,8 @@ $(function() {
 	var eyeInterval = null;
     var walkInterval = null;
 
+    var actionColor = document.getElementById('apply').style.backgroundColor;
+
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
 	    trailColor: '#4A4132',
@@ -19,7 +21,7 @@ $(function() {
 	});
 
 	var strainCountDown = new ProgressBar.Circle('#cdEye', {
-	    color: '#FCB03C',
+	    color: '#BB9229',
 	    trailColor: '#4A4132',
 	    trailWidth: 0.2,
 	    strokeWidth: 4,
@@ -33,7 +35,7 @@ $(function() {
 	});
 
 	var walkCountDown = new ProgressBar.Circle('#cdWalk', {
-	   	color: '#FCB03C',
+	   	color: '#BB9229',
 	    trailColor: '#4A4132',
 	    trailWidth: 0.2,
 	    strokeWidth: 4,
@@ -58,7 +60,7 @@ $(function() {
 
 
 // Settings
-	function checkOption() {
+	function checkTimeOption() {
 		switch (true) {
 			case document.getElementById('eyeOptions').value === 'test':
 				strainTime = 30000
@@ -72,10 +74,11 @@ $(function() {
 			case document.getElementById('eyeOptions').value === '40 minutes':
 				strainTime = 2400000
 			break;
+			stopEverything();
 		}
 		switch (true) {
 			case document.getElementById('walkOptions').value === 'test':
-				walkTime = 10000
+				walkTime = 3000
 			break;
 			case document.getElementById('walkOptions').value === '30 minutes':
 				walkTime = 1800000
@@ -86,8 +89,17 @@ $(function() {
 			case document.getElementById('walkOptions').value === '1 hour 15 minutes':
 				walkTime = 4500000
 			break;
+			stopEverything();
 		}	
+	}
 
+	$('#apply').click(function() {
+		checkTimeOption();
+		checkTheme();
+		$('#settings_container').hide();
+	});
+
+	function checkTheme() {
 		if (document.getElementById('styleOptions').value === 'Autumn') {
 			$('#theme').attr('href', '../styles/themeAutumn.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
@@ -104,14 +116,24 @@ $(function() {
 			$('#theme').attr('href', '../styles/themeSummer.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
-		};
+		} else if (document.getElementById('styleOptions').value === 'Christmas') {
+			$('#theme').attr('href', '../styles/themeChristmas.less');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		} else if (document.getElementById('styleOptions').value === 'Halloween') {
+			$('#theme').attr('href', '../styles/themeHalloween.less');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+		} else if (document.getElementById('styleOptions').value === 'Valentine') {
+			$('#theme').attr('href', '../styles/themeValentine.less');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+        } else if (document.getElementById('styleOptions').value === 'Easter') {
+			$('#theme').attr('href', '../styles/themeEaster.less');
+			$('style[id^="less:"]').remove(); // you need to remove the less
+        	less.refresh();
+        }
 	}
-
-	$('#apply').click(function() {
-		checkOption();
-		$('#settings_container').hide();
-		stopEverything();
-	});
 
 
 
@@ -123,7 +145,7 @@ $(function() {
 		line.animate(1.0);
 		strainCountDown.set(0.0);
 		var eyeNotif = new Notification('DESK HEALTH', {
-	  		body: 'Your eye are getting tired. Look away from your screen for 20 seconds.',
+	  		body: 'Your eyes are getting tired. Look away from your screen for 20 seconds.',
 	  		icon: 'media/eyeIcon.png'
 		});
 		setTimeout(function() {complete()}, lookAwayTime);
@@ -218,13 +240,11 @@ $(function() {
 	
 
 	function toggleSettings() {
-		$('#image').click(function() {
+		$('#settingsIcon').click(function() {
 			$('#settings_container').toggle(200);
 		});
 	}
 	toggleSettings();
-
-
 
 
 
@@ -258,9 +278,12 @@ $(function() {
 
 // known issues:
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
+// I need to find a solution to the color of the animations... they need to take the 'action' color.
+
 
 
 // haha add custom themes (christmas, halloween, valentine, summer, winter, autumn, spring...)
+// add logic to apply matching theme to date.
 
 
 // 20 minutes = 1200000
