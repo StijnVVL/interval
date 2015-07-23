@@ -138,11 +138,15 @@ $(function() {
 	}
 
 	function soundCheck() {
-  		if (document.getElementById('soundCheckbox').checked) {
-  			document.getElementById('eyeStrainSnd').muted = true;
+  		if ($('#soundCheckbox').prop('checked')) {
+			document.getElementById('eyeStrainSnd').muted = true;
   			document.getElementById('eyeComplete').muted = true;
   			document.getElementById('walkSnd').muted = true;
-  		};
+  			
+  		} else {
+  			document.getElementsByTagName('audio').muted = false;
+  			
+  		}
   	}
 
 
