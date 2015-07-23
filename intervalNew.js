@@ -63,7 +63,7 @@ $(function() {
 	function checkTimeOption() {
 		switch (true) {
 			case document.getElementById('eyeOptions').value === 'test':
-				strainTime = 30000
+				strainTime = 5000
 			break;
 			case document.getElementById('eyeOptions').value === '10 minutes':
 				strainTime = 600000
@@ -96,7 +96,9 @@ $(function() {
 	$('#apply').click(function() {
 		checkTimeOption();
 		checkTheme();
+		soundCheck();
 		$('#settings_container').hide();
+		$('.settingsIcon').attr('class', 'settingsIcon');
 	});
 
 	function checkTheme() {
@@ -134,6 +136,14 @@ $(function() {
         	less.refresh();
         }
 	}
+
+	function soundCheck() {
+  		if (document.getElementById('soundCheckbox').checked) {
+  			document.getElementById('eyeStrainSnd').muted = true;
+  			document.getElementById('eyeComplete').muted = true;
+  			document.getElementById('walkSnd').muted = true;
+  		};
+  	}
 
 
 
@@ -240,8 +250,9 @@ $(function() {
 	
 
 	function toggleSettings() {
-		$('#settingsIcon').click(function() {
+		$('.settingsIcon').click(function() {
 			$('#settings_container').toggle(200);
+			$('.settingsIcon').toggleClass('closeIcon', 800);
 		});
 	}
 	toggleSettings();
@@ -281,8 +292,6 @@ $(function() {
 // I need to find a solution to the color of the animations... they need to take the 'action' color.
 
 
-
-// haha add custom themes (christmas, halloween, valentine, summer, winter, autumn, spring...)
 // add logic to apply matching theme to date.
 
 
