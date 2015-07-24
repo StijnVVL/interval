@@ -1,5 +1,8 @@
 $(function() {
 	console.log('main javascript ready');
+	checkNotifCompatibility();
+	Notification.requestPermission();
+
 
 //global vars
 	var lookAwayTime = 20000;
@@ -156,10 +159,7 @@ $(function() {
 		$('#eyemessage').show();
 		line.animate(1.0);
 		strainCountDown.set(0.0);
-		var eyeNotif = new Notification('DESK HEALTH', {
-	  		body: 'Your eyes are getting tired. Look away from your screen for 20 seconds.',
-	  		icon: 'media/eyeIcon.png'
-		});
+		displayEyeNotif();
 		setTimeout(function() {complete()}, lookAwayTime);
 
 		function complete() {
@@ -177,10 +177,6 @@ $(function() {
 	            duration: strainTime
 			});
 		}
-
-		eyeNotif.onclick = function() {
-    		window.focus();
-		};
 	}
 
 
@@ -188,10 +184,7 @@ $(function() {
 		document.getElementById('walkSnd').play();
 		walkCountDown.set(0.0);
 		$('#walkmessage').show();
-		var walkNotif = new Notification('DESK HEALTH', {
-			body: 'Time for a walk!',
-			icon: 'media/walkIcon.png'
-		});
+		displayWalkNotif();
 		restartWalk();
 
 		function restartWalk() {
@@ -209,10 +202,6 @@ $(function() {
 				clearInterval(walkInterval);
 				walkInt();
 			});
-		
-		walkNotif.onclick = function() {
-    		window.focus();
-		};
 	}
 
 
@@ -275,10 +264,9 @@ $(function() {
 		if (!('Notification' in window)) {
   			console.log('this browser does not support notifications')
 		} else {
-			console.log('this browser supports notifications')
+			console.log('this browser supports notifications');
 		};
 	}
-	checkNotifCompatibility();
 
 // request notification permissions to user (required)
 	Notification.requestPermission(function(result) {
@@ -293,7 +281,38 @@ $(function() {
     		return;
   		}
   	});
-  	Notification.requestPermission();
+
+
+	function displayEyeNotif() {
+		if (!('Notification' in window)) {
+  			console.log('this browser does not support notifications')
+		} else {
+			eyeNotif = new Notification('DESK HEALTH', {
+		  		body: 'Your eyes are getting tired. Look away from your screen for 20 seconds.',
+		  		icon: 'media/eyeIcon.png'
+			});
+			eyeNotif.onclick = function() {
+	    		window.focus();
+			};
+		};
+	};
+	function displayWalkNotif() {
+		if (!('Notification' in window)) {
+  			console.log('this browser does not support notifications')
+		} else {
+			walkNotif = new Notification('DESK HEALTH', {
+				body: 'Time for a walk!',
+				icon: 'media/walkIcon.png'
+			});
+			walkNotif.onclick = function() {
+	    		window.focus();
+			};
+		};
+	};
+
+
+
+
 
 
 })
