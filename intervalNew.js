@@ -10,8 +10,6 @@ $(function() {
 	var eyeInterval = null;
     var walkInterval = null;
 
-    var actionColor = document.getElementById('apply').style.backgroundColor;
-
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
 	    trailColor: '#4A4132',
@@ -98,7 +96,7 @@ $(function() {
 		checkTheme();
 		soundCheck();
 		$('#settings_container').hide();
-		$('.settingsIcon').attr('class', 'settingsIcon');
+		$('#settingsIcon').attr('src', '../media/settings.png');
 	});
 
 	function checkTheme() {
@@ -252,15 +250,24 @@ $(function() {
 	});
 	
 	
-
 	function toggleSettings() {
-		$('.settingsIcon').click(function() {
+		$('.settingsDiv').click(function() {
 			$('#settings_container').toggle(200);
-			$('.settingsIcon').toggleClass('closeIcon', 800);
+			toggleImage();
 		});
 	}
 	toggleSettings();
 
+
+	function toggleImage() {
+		var imgSrc = document.getElementById('settingsIcon').src;
+		if ($('#settingsIcon').attr('src') == '../media/settings.png') {
+			$('#settingsIcon').attr('src', '../media/close.png');
+		} else if ($('#settingsIcon').attr('src') == '../media/close.png') {
+			$('#settingsIcon').attr('src', '../media/settings.png');
+		};
+		console.log(document.getElementById('settingsIcon').src);
+	};
 
 
 
@@ -288,17 +295,16 @@ $(function() {
   	});
   	Notification.requestPermission();
 
+
 })
 
 
 // known issues:
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
 // I need to find a solution to the color of the animations... they need to take the 'action' color.
+// notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
+
 
 
 // add logic to apply matching theme to date.
 
-
-// 20 minutes = 1200000
-// 55 minutes = 3300000
-// testTimes = 3000, 5000, 10000

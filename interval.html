@@ -5,7 +5,7 @@
 	<link rel="stylesheet/less" type="text/less" id="globalStyle" href="styles/global.less">	
 	<link rel="season stylesheet/less" type="text/less" id="theme" href="styles/themeAutumn.less">
 	<link rel="stylesheet" href="progressbar.js/local-dev/main.css">
-	<script type="text/javascript" src="jquery/jquery.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="intervalNew.js"></script>
 	<script src="progressbar.js/dist/progressbar.min.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,400' rel='stylesheet' type='text/css'>
@@ -17,7 +17,9 @@
 <body>
 	<div id="header">
 		<div id="title_wrapper">
-			<img class="settingsIcon">
+			<div class="settingsDiv">
+				<img id="settingsIcon" src="../media/settings.png" data-othersource="../media/close.png">
+			</div>
 			<p id="title"> <b>DESK HEALTH</b> </p>
 		</div>
 	</div>
@@ -100,7 +102,7 @@
 			<source src='media/storedoornotif.wav' type='audio/wav'>
 		</audio>
 		<audio id='eyeComplete'>
-			<source src='media/airplanenotif.wav' type='audio/wav'>
+			<source src='media/storedoornotif.wav' type='audio/wav'>
 		</audio>
 		<audio id='walkSnd'>
 			<source src='media/glasspingnotif.wav' type='audio/wav'>
