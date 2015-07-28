@@ -2,6 +2,8 @@ $(function() {
 	console.log('main javascript ready');
 	checkNotifCompatibility();
 	Notification.requestPermission();
+	myTimer();
+	toggleSettings();
 	setCheckboxAttr();
 	detectChanges();
 
@@ -59,7 +61,6 @@ $(function() {
 	    var time = new Date();
 	    document.getElementById("clock").innerHTML = time.toLocaleTimeString('en-GB');
 	}
-	myTimer();
 	var updateTime = setInterval(function(){myTimer()}, 500);
 
 
@@ -111,7 +112,9 @@ $(function() {
 	});
 
 	function checkTheme() {
-		if (document.getElementById('styleOptions').value === 'Autumn') {
+		if (newState.theme === loadState.theme) {
+			return
+		} else if (document.getElementById('styleOptions').value === 'Autumn') {
 			$('#theme').attr('href', '../styles/themeAutumn.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
@@ -265,7 +268,6 @@ $(function() {
 			toggleImage();
 		});
 	}
-	toggleSettings();
 
 
 	function toggleImage() {
@@ -385,5 +387,5 @@ $(function() {
 // need to apply logic to NOT reload css when no change is detected. This can be done by declaring 2 global variables and comparing them. Logic also applied to timeOptions
 // add logic to apply matching theme to date.
 // set the volume of walkSound to 0.5 or sth
-// write logic to detect changes in the settings menu
+// collect cookies which save the entire state (theme, progress and mute)
 
