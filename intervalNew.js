@@ -2,7 +2,8 @@ $(function() {
 	console.log('main javascript ready');
 	checkNotifCompatibility();
 	Notification.requestPermission();
-
+	setCheckboxAttr();
+	detectChanges();
 
 //global vars
 	var lookAwayTime = 20000;
@@ -12,6 +13,9 @@ $(function() {
 	// make sure there are no errors when new values are applied when the interval is not yet running
 	var eyeInterval = null;
     var walkInterval = null;
+
+    var runningEyeVal = document.getElementById('eyeOptions').value;
+    var runningWalkVal = document.getElementById('walkOptions').value;
 
 	var line = new ProgressBar.Line('#progress', {
 	    trailWidth: 0.2,
@@ -62,42 +66,46 @@ $(function() {
 
 // Settings
 	function checkTimeOption() {
+		eyeVal = document.getElementById('eyeOptions').value;
+		walkVal = document.getElementById('walkOptions').value;	
 		switch (true) {
-			case document.getElementById('eyeOptions').value === 'test':
+			case eyeVal === 'test':
 				strainTime = 5000
 			break;
-			case document.getElementById('eyeOptions').value === '10 minutes':
+			case eyeVal === '10 minutes':
 				strainTime = 600000
 			break;
-			case document.getElementById('eyeOptions').value === '20 minutes (recommended)':
+			case eyeVal === '20 minutes (recommended)':
 				strainTime = 1200000
 			break;
-			case document.getElementById('eyeOptions').value === '40 minutes':
+			case eyeVal === '40 minutes':
 				strainTime = 2400000
 			break;
-			stopEverything();
 		}
 		switch (true) {
-			case document.getElementById('walkOptions').value === 'test':
+			case walkVal === 'test':
 				walkTime = 3000
 			break;
-			case document.getElementById('walkOptions').value === '30 minutes':
+			case walkVal === '30 minutes':
 				walkTime = 1800000
 			break;
-			case document.getElementById('walkOptions').value === '55 minutes (recommended)':
+			case walkVal === '55 minutes (recommended)':
 				walkTime = 3300000
 			break;
-			case document.getElementById('walkOptions').value === '1 hour 15 minutes':
+			case walkVal === '1 hour 15 minutes':
 				walkTime = 4500000
 			break;
-			stopEverything();
-		}	
+		}
 	}
 
 	$('#apply').click(function() {
 		checkTimeOption();
+		compareEye();
+		compareWalk();
 		checkTheme();
 		soundCheck();
+		loadState = newState;
+		$('#apply').hide();
 		$('#settings_container').hide();
 		$('#settingsIcon').attr('src', '../media/settings.png');
 	});
@@ -146,11 +154,19 @@ $(function() {
   			
   		} else {
   			document.getElementsByTagName('audio').muted = false;
-  			
   		}
   	}
 
-
+  	function compareEye() {
+  		if (eyeVal != runningEyeVal) {
+			stopEverything();
+		};
+  	}
+  	function compareWalk() {
+  		if (walkVal != runningWalkVal) {
+  			stopEverything();
+  		}
+  	}
 
 
 // defining what happens 
@@ -208,9 +224,11 @@ $(function() {
 	//setting the intervals
 	function eyeInt() {
 		eyeInterval = setInterval(function() { strain() }, strainTime);
+		runningEyeVal = document.getElementById('eyeOptions').value;
 	}
 	function walkInt() {
 		walkInterval = setInterval(function() { walk() }, walkTime);
+		runningWalkVal = document.getElementById('walkOptions').value;		
 	}
 
 	// starting to count
@@ -223,6 +241,7 @@ $(function() {
 		walkCountDown.animate(1.0,   {
             duration: walkTime
         });
+        $('#startButton').attr('disabled', true);
 	});
 	
 	// stop everything
@@ -231,6 +250,7 @@ $(function() {
 		strainCountDown.set(0.0);
 		clearInterval(walkInterval);
 		walkCountDown.set(0.0);
+		$('#startButton').removeAttr('disabled');
 	}
 
 	//stop button
@@ -255,7 +275,6 @@ $(function() {
 		} else if ($('#settingsIcon').attr('src') == '../media/close.png') {
 			$('#settingsIcon').attr('src', '../media/settings.png');
 		};
-		console.log(document.getElementById('settingsIcon').src);
 	};
 
 
@@ -310,20 +329,61 @@ $(function() {
 		};
 	};
 
+	
 
+	function setCheckboxAttr() {
+		if ($('#soundCheckbox').is(':checked')) {
+			$('#soundCheckbox').attr('value', 'true');
+		} else {
+			$('#soundCheckbox').attr('value', 'false');
+		}
+	}
+	var loadState = {
+		eye: document.getElementById('eyeOptions').value,
+		walk: document.getElementById('walkOptions').value,
+		theme: document.getElementById('styleOptions').value,
+		sound: document.getElementById('soundCheckbox').value
+	}
 
+	function detectChanges() {
+		$(':input').change(function() {
+			setCheckboxAttr();
+			newState = {
+				eye: document.getElementById('eyeOptions').value,
+				walk: document.getElementById('walkOptions').value,
+				theme: document.getElementById('styleOptions').value,
+				sound: document.getElementById('soundCheckbox').value
+			}
 
-
+			if (newState.eye != loadState.eye) {
+				$('#apply').show();
+			} else if (newState.walk != loadState.walk) {
+				$('#apply').show();
+			} else if (newState.theme != loadState.theme) {
+				$('#apply').show();
+			} else if (newState.sound != loadState.sound) {
+				$('#apply').show();
+			} else {
+				$('#apply').hide();
+			}
+		});
+	};
 
 })
 
 
 // known issues:
+
 // stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
 // I need to find a solution to the color of the animations... they need to take the 'action' color.
 // notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
+// 		possible solution found. Needs to be tested
 
 
+// improvements:
 
+// need to apply logic to NOT reload css when no change is detected. This can be done by declaring 2 global variables and comparing them. Logic also applied to timeOptions
 // add logic to apply matching theme to date.
+// set the volume of walkSound to 0.5 or sth
+// write logic to detect changes in the settings menu
 
