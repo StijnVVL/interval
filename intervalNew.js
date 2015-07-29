@@ -1,4 +1,5 @@
 $(function() {
+// onload functions
 	console.log('main javascript ready');
 	checkNotifCompatibility();
 	Notification.requestPermission();
@@ -6,6 +7,10 @@ $(function() {
 	toggleSettings();
 	setCheckboxAttr();
 	detectChanges();
+
+
+
+
 
 //global vars
 	var lookAwayTime = 20000;
@@ -56,6 +61,13 @@ $(function() {
 	});	
 
 
+
+
+
+
+
+
+
 // the clock
 	function myTimer() {
 	    var time = new Date();
@@ -65,7 +77,57 @@ $(function() {
 
 
 
+
+
+
+
+
 // Settings
+	// settings menu toggle options
+	$(document).mouseup(function (e) {
+    var container = $("#settings_container");
+    var iconExcept = $('#settingsIcon');
+    	if (!container.is(e.target) && container.has(e.target).length === 0 && !iconExcept.is(e.target)) {
+        	container.hide();
+        	$('#settingsIcon').attr('src', '../media/settings.png');
+    	}
+	});
+	function toggleSettings() {
+		$('.settingsDiv').click(function() {
+			$('#settings_container').toggle(200);
+			toggleImage();
+		});
+	}
+	function toggleImage() {
+		var imgSrc = document.getElementById('settingsIcon').src;
+		if ($('#settingsIcon').attr('src') == '../media/settings.png') {
+			$('#settingsIcon').attr('src', '../media/close.png');
+		} else if ($('#settingsIcon').attr('src') == '../media/close.png') {
+			$('#settingsIcon').attr('src', '../media/settings.png');
+		};
+	};
+
+
+
+
+
+
+
+	// apply functions
+	$('#apply').click(function() {
+		checkTimeOption();
+		compareEye();
+		compareWalk();
+		checkTheme();
+		soundCheck();
+		loadState = newState;
+		$('#apply').hide();
+		$('#settings_container').hide();
+		$('#settingsIcon').attr('src', '../media/settings.png');
+		changeNotif();
+	});
+
+
 	function checkTimeOption() {
 		eyeVal = document.getElementById('eyeOptions').value;
 		walkVal = document.getElementById('walkOptions').value;	
@@ -98,18 +160,6 @@ $(function() {
 			break;
 		}
 	}
-
-	$('#apply').click(function() {
-		checkTimeOption();
-		compareEye();
-		compareWalk();
-		checkTheme();
-		soundCheck();
-		loadState = newState;
-		$('#apply').hide();
-		$('#settings_container').hide();
-		$('#settingsIcon').attr('src', '../media/settings.png');
-	});
 
 	function checkTheme() {
 		if (newState.theme === loadState.theme) {
@@ -172,20 +222,23 @@ $(function() {
   	}
 
 
-// defining what happens 
+
+
+
+
+
+
+// Counter logic and base functionality 
 	function strain() {
 		document.getElementById('eyeStrainSnd').play();
 		$('#eyemessage').show();
 		line.animate(1.0);
-		strainCountDown.set(0.0);
 		displayEyeNotif();
 		setTimeout(function() {complete()}, lookAwayTime);
 
 		function complete() {
 			document.getElementById('eyeComplete').play();
-			$('#eyemessage').hide();
-			eyeNotif.close();
-			line.set(0.0);
+			stopEye();
 			restartEye();
 		}
 		// clear the interval and restart the whole function
@@ -214,15 +267,21 @@ $(function() {
 
 		//I have walked - button
 			$('#done').click(function() {
-				$("#walkmessage").hide();
-				walkCountDown.set(0.0);
-				walkNotif.close();
+				stopWalk();
 				restartWalk();
 				clearInterval(walkInterval);
 				walkInt();
 			});
 	}
-
+	function stopEye() {
+		$('#eyemessage').hide();
+		line.set(0.0);
+		strainCountDown.set(0.0);
+	}
+	function stopWalk() {
+		$("#walkmessage").hide();
+		walkCountDown.set(0.0);
+	}
 
 	//setting the intervals
 	function eyeInt() {
@@ -234,7 +293,9 @@ $(function() {
 		runningWalkVal = document.getElementById('walkOptions').value;		
 	}
 
-	// starting to count
+
+
+// Initiate base logic
 	$('#startButton').click(function() {
 		eyeInt();
 		strainCountDown.animate(1.0, {
@@ -246,41 +307,32 @@ $(function() {
         });
         $('#startButton').attr('disabled', true);
 	});
-	
-	// stop everything
-	function stopEverything() {
-		clearInterval(eyeInterval);
-		strainCountDown.set(0.0);
-		clearInterval(walkInterval);
-		walkCountDown.set(0.0);
-		$('#startButton').removeAttr('disabled');
-	}
 
 	//stop button
 	$('#stopButton').click(function() {
 		stopEverything();
 	});
-	
-	
-	function toggleSettings() {
-		$('.settingsDiv').click(function() {
-			$('#settings_container').toggle(200);
-			toggleImage();
-		});
+
+	// stop everything
+	function stopEverything() {
+		clearInterval(eyeInterval);
+		strainCountDown.set(0.0);
+		stopEye();
+		clearInterval(walkInterval);
+		walkCountDown.set(0.0);
+		stopWalk();
+		$('#startButton').removeAttr('disabled');
 	}
-
-
-	function toggleImage() {
-		var imgSrc = document.getElementById('settingsIcon').src;
-		if ($('#settingsIcon').attr('src') == '../media/settings.png') {
-			$('#settingsIcon').attr('src', '../media/close.png');
-		} else if ($('#settingsIcon').attr('src') == '../media/close.png') {
-			$('#settingsIcon').attr('src', '../media/settings.png');
-		};
-	};
+	
 
 
 
+
+
+
+
+// browser notifications
+	// check compatibility
 	function checkNotifCompatibility() {
 		if (!('Notification' in window)) {
   			console.log('this browser does not support notifications')
@@ -289,7 +341,7 @@ $(function() {
 		};
 	}
 
-// request notification permissions to user (required)
+	// request notification permissions to user (required)
 	Notification.requestPermission(function(result) {
   		if (result === 'denied') {
     		console.log('Permission wasn\'t granted. Allow a retry.');
@@ -331,8 +383,14 @@ $(function() {
 		};
 	};
 
-	
 
+
+
+
+
+
+	
+// logic to deal with unsaved changes ()
 	function setCheckboxAttr() {
 		if ($('#soundCheckbox').is(':checked')) {
 			$('#soundCheckbox').attr('value', 'true');
@@ -371,12 +429,16 @@ $(function() {
 		});
 	};
 
+	function changeNotif() {
+		$('.toast').fadeIn(400).delay(3000).fadeOut(400);
+	}
+
 })
 
 
 // known issues:
 
-// stopButton doesn't work correctly when js is in function (strain and walk). Needs to be addressed.
+// stopping the logic when eyemessage is open results in another loop after 20 seconds. needs to be addressed.
 // I need to find a solution to the color of the animations... they need to take the 'action' color.
 // notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
 // 		possible solution found. Needs to be tested
@@ -384,7 +446,6 @@ $(function() {
 
 // improvements:
 
-// need to apply logic to NOT reload css when no change is detected. This can be done by declaring 2 global variables and comparing them. Logic also applied to timeOptions
 // add logic to apply matching theme to date.
 // set the volume of walkSound to 0.5 or sth
 // collect cookies which save the entire state (theme, progress and mute)
