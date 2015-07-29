@@ -4,6 +4,7 @@ $(function() {
 	checkNotifCompatibility();
 	Notification.requestPermission();
 	myTimer();
+	buildAnimations();
 	toggleSettings();
 	setCheckboxAttr();
 	detectChanges();
@@ -23,43 +24,6 @@ $(function() {
 
     var runningEyeVal = document.getElementById('eyeOptions').value;
     var runningWalkVal = document.getElementById('walkOptions').value;
-
-	var line = new ProgressBar.Line('#progress', {
-	    trailWidth: 0.2,
-	    trailColor: '#4A4132',
-	    duration: lookAwayTime,
-	    strokeWidth: 1,
-	    color: '#BB9229',
-	});
-
-	var strainCountDown = new ProgressBar.Circle('#cdEye', {
-	    color: '#BB9229',
-	    trailColor: '#4A4132',
-	    trailWidth: 0.2,
-	    strokeWidth: 4,
-	    duration: strainTime,
-	    text: {
-        	value: '0'
-    	},
-    		step: function(state, shape) {
-        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
-    		}
-	});
-
-	var walkCountDown = new ProgressBar.Circle('#cdWalk', {
-	   	color: '#BB9229',
-	    trailColor: '#4A4132',
-	    trailWidth: 0.2,
-	    strokeWidth: 4,
-	    duration: walkTime,
-	    text: {
-        	value: '0'
-    	},
-    		step: function(state, shape) {
-        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
-    		}	    
-	});	
-
 
 
 
@@ -113,7 +77,7 @@ $(function() {
 
 
 
-	// apply functions
+// functions to run on 'apply'
 	$('#apply').click(function() {
 		checkTimeOption();
 		compareEye();
@@ -168,34 +132,50 @@ $(function() {
 			$('#theme').attr('href', '../styles/themeAutumn.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
 		} else if (document.getElementById('styleOptions').value === 'Winter') {
 			$('#theme').attr('href', '../styles/themeWinter.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
 		} else if (document.getElementById('styleOptions').value === 'Spring') {
 			$('#theme').attr('href', '../styles/themeSpring.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();        	
 		} else if (document.getElementById('styleOptions').value === 'Summer') {
 			$('#theme').attr('href', '../styles/themeSummer.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
 		} else if (document.getElementById('styleOptions').value === 'Christmas') {
 			$('#theme').attr('href', '../styles/themeChristmas.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
 		} else if (document.getElementById('styleOptions').value === 'Halloween') {
 			$('#theme').attr('href', '../styles/themeHalloween.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
 		} else if (document.getElementById('styleOptions').value === 'Valentine') {
 			$('#theme').attr('href', '../styles/themeValentine.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
         } else if (document.getElementById('styleOptions').value === 'Easter') {
 			$('#theme').attr('href', '../styles/themeEaster.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
+        	destroyAnimations();
+        	buildAnimations();
         }
 	}
 
@@ -296,6 +276,7 @@ $(function() {
 
 
 // Initiate base logic
+	// start button
 	$('#startButton').click(function() {
 		eyeInt();
 		strainCountDown.animate(1.0, {
@@ -308,7 +289,7 @@ $(function() {
         $('#startButton').attr('disabled', true);
 	});
 
-	//stop button
+	// stop button
 	$('#stopButton').click(function() {
 		stopEverything();
 	});
@@ -433,13 +414,69 @@ $(function() {
 		$('.toast').fadeIn(400).delay(3000).fadeOut(400);
 	}
 
+
+
+
+
+
+
+
+// destroy and rebuild the animations to adapt to the theme
+	function setNewColor() {
+		action = $('#startButton').css('background-color');
+		return action;
+	}
+
+	function buildAnimations() {	
+		line = new ProgressBar.Line('#progress', {
+		    color: setNewColor(),
+		    trailColor: '#4A4132',
+		    trailWidth: 0.2,
+		    strokeWidth: 1,
+		    duration: lookAwayTime
+		});
+
+		strainCountDown = new ProgressBar.Circle('#cdEye', {
+		    color: setNewColor(),
+		    trailColor: '#4A4132',
+		    trailWidth: 0.2,
+		    strokeWidth: 4,
+		    duration: strainTime,
+		    text: {
+	        	value: '0'
+	    	},
+	    		step: function(state, shape) {
+	        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+	    		}
+		});
+
+		walkCountDown = new ProgressBar.Circle('#cdWalk', {
+		   	color: setNewColor(),
+		    trailColor: '#4A4132',
+		    trailWidth: 0.2,
+		    strokeWidth: 4,
+		    duration: walkTime,
+		    text: {
+	        	value: '0'
+	    	},
+	    		step: function(state, shape) {
+	        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+	    		}	    
+		});	
+	}
+
+	function destroyAnimations() {
+		line.destroy();
+		strainCountDown.destroy();
+		walkCountDown.destroy();
+	}
 })
 
 
 // known issues:
 
+// reading out color an applying to animations DOES NOT WORK IN OFFLINE VERSION. reason unknown :s.
 // stopping the logic when eyemessage is open results in another loop after 20 seconds. needs to be addressed.
-// I need to find a solution to the color of the animations... they need to take the 'action' color.
 // notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
 // 		possible solution found. Needs to be tested
 
