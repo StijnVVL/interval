@@ -53,14 +53,14 @@
 			<p class="settingstext">Theme</p>
 			<span class="selectcont">	
 				<select id="styleOptions" autocomplete="off">
-					<option selected="">Autumn</option>
-					<option>Winter</option>
-					<option>Spring</option>
-					<option>Summer</option>
-					<option>Christmas</option>
-					<option>Halloween</option>
-					<option>Valentine</option>
-					<option>Easter</option>
+					<option value="Autumn">Autumn</option>
+					<option value="Winter">Winter</option>
+					<option value="Spring">Spring</option>
+					<option value="Summer">Summer</option>
+					<option value="Christmas">Christmas</option>
+					<option value="Halloween">Halloween</option>
+					<option value="Valentine">Valentine</option>
+					<option value="Easter">Easter</option>
 				</select>
 			</span>
 		</div>
@@ -101,13 +101,13 @@
 		<button id="startButton">START</button>
 		<button id="stopButton">STOP</button>
 		<audio id='eyeStrainSnd'>
-			<source src='media/storedoornotif.wav' type='audio/wav'>
+			<source id='ess' src='media/storedoornotif.wav' type='audio/wav'>
 		</audio>
 		<audio id='eyeComplete'>
-			<source src='media/storedoornotif.wav' type='audio/wav'>
+			<source id='ec' src='media/storedoornotif.wav' type='audio/wav'>
 		</audio>
 		<audio id='walkSnd'>
-			<source src='media/glasspingnotif.wav' type='audio/wav'>
+			<source id='ws' src='media/glasspingnotif.wav' type='audio/wav'>
 		</audio>
 	</div>
 

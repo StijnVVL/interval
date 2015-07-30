@@ -1,6 +1,7 @@
 $(function() {
 // onload functions
 	console.log('main javascript ready');
+	applyRelevantTheme();
 	checkNotifCompatibility();
 	Notification.requestPermission();
 	myTimer();
@@ -27,6 +28,10 @@ $(function() {
 
     var completeEye;
 
+    var walkSnd = document.getElementById('walkSnd');
+    walkSnd.volume = 0.5;
+    var eyeStrainSnd = document.getElementById('eyeStrainSnd');
+    var eyeComplete = document.getElementById('eyeComplete');
 
 
 
@@ -126,51 +131,52 @@ $(function() {
 	}
 
 	function checkTheme() {
+		var styleOptions = document.getElementById('styleOptions');
 		if (newState.theme === loadState.theme) {
 			return
-		} else if (document.getElementById('styleOptions').value === 'Autumn') {
+		} else if (styleOptions.value === 'Autumn') {
 			$('#theme').attr('href', '../styles/themeAutumn.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-		} else if (document.getElementById('styleOptions').value === 'Winter') {
+		} else if (styleOptions.value === 'Winter') {
 			$('#theme').attr('href', '../styles/themeWinter.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-		} else if (document.getElementById('styleOptions').value === 'Spring') {
+		} else if (styleOptions.value === 'Spring') {
 			$('#theme').attr('href', '../styles/themeSpring.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();        	
-		} else if (document.getElementById('styleOptions').value === 'Summer') {
+		} else if (styleOptions.value === 'Summer') {
 			$('#theme').attr('href', '../styles/themeSummer.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-		} else if (document.getElementById('styleOptions').value === 'Christmas') {
+		} else if (styleOptions.value === 'Christmas') {
 			$('#theme').attr('href', '../styles/themeChristmas.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-		} else if (document.getElementById('styleOptions').value === 'Halloween') {
+		} else if (styleOptions.value === 'Halloween') {
 			$('#theme').attr('href', '../styles/themeHalloween.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-		} else if (document.getElementById('styleOptions').value === 'Valentine') {
+		} else if (styleOptions.value === 'Valentine') {
 			$('#theme').attr('href', '../styles/themeValentine.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
         	destroyAnimations();
         	buildAnimations();
-        } else if (document.getElementById('styleOptions').value === 'Easter') {
+        } else if (styleOptions.value === 'Easter') {
 			$('#theme').attr('href', '../styles/themeEaster.less');
 			$('style[id^="less:"]').remove(); // you need to remove the less
         	less.refresh();
@@ -181,9 +187,9 @@ $(function() {
 
 	function soundCheck() {
   		if ($('#soundCheckbox').prop('checked')) {
-			document.getElementById('eyeStrainSnd').muted = true;
-  			document.getElementById('eyeComplete').muted = true;
-  			document.getElementById('walkSnd').muted = true;
+			eyeStrainSnd.muted = true;
+			eyeComplete = true;
+  			walkSnd.muted = true;
   			
   		} else {
   			document.getElementsByTagName('audio').muted = false;
@@ -210,14 +216,14 @@ $(function() {
 
 // Counter logic and base functionality 
 	function strain() {
-		document.getElementById('eyeStrainSnd').play();
+		eyeStrainSnd.play();
 		$('#eyemessage').show();
 		line.animate(1.0);
 		displayEyeNotif();
 		completeEye = setTimeout(function() {complete()}, lookAwayTime);
 
 		function complete() {
-			document.getElementById('eyeComplete').play();
+			eyeStrainSnd.play();
 			stopEye();
 			restartEye();
 		}
@@ -233,7 +239,7 @@ $(function() {
 
 
 	function walk() {
-		document.getElementById('walkSnd').play();
+		walkSnd.play();
 		walkCountDown.set(0.0);
 		$('#walkmessage').show();
 		displayWalkNotif();
@@ -433,41 +439,43 @@ $(function() {
 	}
 
 	function buildAnimations() {	
-		line = new ProgressBar.Line('#progress', {
-		    color: setNewColor(),
-		    trailColor: '#4A4132',
-		    trailWidth: 0.2,
-		    strokeWidth: 1,
-		    duration: lookAwayTime
-		});
+		var delayBuild = setTimeout(function() {
+			line = new ProgressBar.Line('#progress', {
+			    color: setNewColor(),
+			    trailColor: '#4A4132',
+			    trailWidth: 0.2,
+			    strokeWidth: 1,
+			    duration: lookAwayTime
+			});
 
-		strainCountDown = new ProgressBar.Circle('#cdEye', {
-		    color: setNewColor(),
-		    trailColor: '#4A4132',
-		    trailWidth: 0.2,
-		    strokeWidth: 4,
-		    duration: strainTime,
-		    text: {
-	        	value: '0'
-	    	},
-	    		step: function(state, shape) {
-	        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
-	    		}
-		});
+			strainCountDown = new ProgressBar.Circle('#cdEye', {
+			    color: setNewColor(),
+			    trailColor: '#4A4132',
+			    trailWidth: 0.2,
+			    strokeWidth: 4,
+			    duration: strainTime,
+			    text: {
+		        	value: '0'
+		    	},
+		    		step: function(state, shape) {
+		        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+		    		}
+			});
 
-		walkCountDown = new ProgressBar.Circle('#cdWalk', {
-		   	color: setNewColor(),
-		    trailColor: '#4A4132',
-		    trailWidth: 0.2,
-		    strokeWidth: 4,
-		    duration: walkTime,
-		    text: {
-	        	value: '0'
-	    	},
-	    		step: function(state, shape) {
-	        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
-	    		}	    
-		});	
+			walkCountDown = new ProgressBar.Circle('#cdWalk', {
+			   	color: setNewColor(),
+			    trailColor: '#4A4132',
+			    trailWidth: 0.2,
+			    strokeWidth: 4,
+			    duration: walkTime,
+			    text: {
+		        	value: '0'
+		    	},
+		    		step: function(state, shape) {
+		        		shape.setText((shape.value() * 100 ).toFixed(0) + "%");
+		    		}	    
+			});	
+		}, 50);
 	}
 
 	function destroyAnimations() {
@@ -475,10 +483,51 @@ $(function() {
 		strainCountDown.destroy();
 		walkCountDown.destroy();
 	}
+
+
+
+
+
+
+
+
+
+	function applyRelevantTheme() {
+		var currentDate = new Date();
+		var marchEquinox = new Date(2015, 02, 20);
+		var juneSolstice = new Date(2015, 05, 21);
+		var septEquinox = new Date(2015, 08, 23);
+		var decSolstice = new Date(2015, 11, 22);
+
+
+		if (currentDate <= marchEquinox) {
+			$('#theme').attr('href', '../styles/themeWinter.less');
+			$('style[id^="less:"]').remove(); 
+        	less.refresh();
+        	$('#styleOptions option[value=Winter]').prop('selected', true);
+		} else if (currentDate <= juneSolstice) {
+			$('#theme').attr('href', '../styles/themeSpring.less');
+			$('style[id^="less:"]').remove(); 
+        	less.refresh();
+        	$('#styleOptions option[value=Spring]').prop('selected', true);
+		} else if (currentDate <= septEquinox) {
+			$('#theme').attr('href', '../styles/themeSummer.less');
+			$('style[id^="less:"]').remove(); 
+        	less.refresh();
+        	$('#styleOptions option[value=Summer]').prop('selected', true);
+		} else if (currentDate <= decSolstice) {
+			$('#theme').attr('href', '../styles/themeAutumn.less');
+			$('style[id^="less:"]').remove(); 
+        	less.refresh();
+        	$('#styleOptions option[value=Autumn]').prop('selected', true);
+		} else {
+			console.log('something is wrong with automatically setting the theme');
+		}
+	}
 })
 
 
-// known issues:
+// known (possible) issues:
 
 // notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
 // 		possible solution found. Needs to be tested
@@ -486,7 +535,7 @@ $(function() {
 
 // improvements:
 
-// add logic to apply matching theme to date.
-// set the volume of walkSound to 0.5 or sth
+// add thematic sounds
+// add coloured divs to options of themes (some sort of preview)
 // collect cookies which save the entire state (theme, progress and mute)
 
