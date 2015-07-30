@@ -25,7 +25,7 @@ $(function() {
     var runningEyeVal = document.getElementById('eyeOptions').value;
     var runningWalkVal = document.getElementById('walkOptions').value;
 
-
+    var completeEye;
 
 
 
@@ -214,7 +214,7 @@ $(function() {
 		$('#eyemessage').show();
 		line.animate(1.0);
 		displayEyeNotif();
-		setTimeout(function() {complete()}, lookAwayTime);
+		completeEye = setTimeout(function() {complete()}, lookAwayTime);
 
 		function complete() {
 			document.getElementById('eyeComplete').play();
@@ -257,6 +257,7 @@ $(function() {
 		$('#eyemessage').hide();
 		line.set(0.0);
 		strainCountDown.set(0.0);
+		window.clearTimeout(completeEye);
 	}
 	function stopWalk() {
 		$("#walkmessage").hide();
@@ -275,6 +276,8 @@ $(function() {
 
 
 
+
+
 // Initiate base logic
 	// start button
 	$('#startButton').click(function() {
@@ -287,6 +290,7 @@ $(function() {
             duration: walkTime
         });
         $('#startButton').attr('disabled', true);
+        $('#startButton').addClass('hover');
 	});
 
 	// stop button
@@ -303,6 +307,7 @@ $(function() {
 		walkCountDown.set(0.0);
 		stopWalk();
 		$('#startButton').removeAttr('disabled');
+		$('#startButton').removeClass('hover');
 	}
 	
 
@@ -371,7 +376,7 @@ $(function() {
 
 
 	
-// logic to deal with unsaved changes ()
+// logic to deal with unsaved changes
 	function setCheckboxAttr() {
 		if ($('#soundCheckbox').is(':checked')) {
 			$('#soundCheckbox').attr('value', 'true');
@@ -475,8 +480,6 @@ $(function() {
 
 // known issues:
 
-// reading out color an applying to animations DOES NOT WORK IN OFFLINE VERSION. reason unknown :s.
-// stopping the logic when eyemessage is open results in another loop after 20 seconds. needs to be addressed.
 // notifications don't work in IE. Need to address this, because application crashes when it hits the first notification.
 // 		possible solution found. Needs to be tested
 
