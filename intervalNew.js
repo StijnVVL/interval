@@ -14,7 +14,7 @@ $(function() {
 
 
 
-//global vars
+// global vars
 	var lookAwayTime = 20000;
 	var strainTime = 1200000;
 	var walkTime = 3300000;
@@ -498,31 +498,67 @@ $(function() {
 		var juneSolstice = new Date(2015, 05, 21);
 		var septEquinox = new Date(2015, 08, 23);
 		var decSolstice = new Date(2015, 11, 22);
+		var halloween = new Date(2015, 09, 31);
+		var christmas = new Date(2015, 11, 25);
+		var valentine = new Date(2015, 01, 14);
+
 
 
 		if (currentDate <= marchEquinox) {
 			$('#theme').attr('href', '../styles/themeWinter.less');
+			$('#styleOptions option[value=Winter]').prop('selected', true);
 			$('style[id^="less:"]').remove(); 
         	less.refresh();
-        	$('#styleOptions option[value=Winter]').prop('selected', true);
+        	// checkChristmas();
+        	// checkValentine();
 		} else if (currentDate <= juneSolstice) {
 			$('#theme').attr('href', '../styles/themeSpring.less');
+        	$('#styleOptions option[value=Spring]').prop('selected', true);			
 			$('style[id^="less:"]').remove(); 
         	less.refresh();
-        	$('#styleOptions option[value=Spring]').prop('selected', true);
 		} else if (currentDate <= septEquinox) {
 			$('#theme').attr('href', '../styles/themeSummer.less');
+        	$('#styleOptions option[value=Summer]').prop('selected', true);			
 			$('style[id^="less:"]').remove(); 
         	less.refresh();
-        	$('#styleOptions option[value=Summer]').prop('selected', true);
 		} else if (currentDate <= decSolstice) {
 			$('#theme').attr('href', '../styles/themeAutumn.less');
+			$('#styleOptions option[value=Autumn]').prop('selected', true);
 			$('style[id^="less:"]').remove(); 
         	less.refresh();
-        	$('#styleOptions option[value=Autumn]').prop('selected', true);
+        	checkHalloween();
 		} else {
-			console.log('something is wrong with automatically setting the theme');
+			console.log('!!!! something is wrong with automatically setting the theme !!!!');
 		}
+
+		function checkHalloween() {
+			if (currentDate = halloween) {
+				$('#theme').attr('href', '../styles/themeHalloween.less');
+				$('style[id^="less:"]').remove(); 
+	        	less.refresh();
+	        	$('#styleOptions option[value=Halloween]').prop('selected', true);
+			}
+		}
+		function checkChristmas() {
+			if (currentDate = christmas) {
+				$('#theme').attr('href', '../styles/themeChristmas.less');
+				$('style[id^="less:"]').remove(); 
+	        	less.refresh();
+	        	$('#styleOptions option[value=Christmas]').prop('selected', true);
+			} else {
+				return
+			}
+		}
+		// function checkValentine() {
+		// 	if (currentDate = valentine) {
+		// 		$('#theme').attr('href', '../styles/themeValentine.less');
+		// 		$('style[id^="less:"]').remove(); 
+	 //        	less.refresh();
+	 //        	$('#styleOptions option[value=Valentine]').prop('selected', true);
+		// 	} else {
+		// 		return
+		// 	}
+		// }
 	}
 })
 
